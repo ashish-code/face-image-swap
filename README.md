@@ -27,24 +27,18 @@ opencv (https://github.com/opencv/opencv)
 Seek help online on installing these libraries for use with Python 3.x
 The installation procedure for these libraries can vary with local system configuration.
 
-----------------------------------------------------------------------
-
-output file naming convention:
-The resulting file is named as: <donor image name>--<recipient image name>.png
-You can use the '--' to split the result file name to acquire the donor/recipient image name and change it as desired.
-
-The program is not designed to work in all circumstances, ie. face not detected or sufficient facial landmarks not found,
-for the face path is too small, etc. In all such cases, the failed output file is recorded in a log file: ./log.txt
-
 ------------------------------------------------------------------------
 
 ## Results
 
-Donor Image:
-![donor image](https://github.com/ashish-code/face-image-swap/blob/master/ash.jpg)
+#### Donor Image:
 
-Recipient Image:
-![recipient image](https://github.com/ashish-code/face-image-swap/blob/master/trump.jpg)
+<img src="https://github.com/ashish-code/face-image-swap/blob/master/ash.jpg" height="400" width="300">
 
-Result Image:
-![face swapped image](https://github.com/ashish-code/face-image-swap/blob/master/output.jpg)
+#### Recipient Image:
+
+<img src="https://github.com/ashish-code/face-image-swap/blob/master/trump.jpg" height="400" width="600">
+
+#### Face-swapped Image:
+
+<img src="https://github.com/ashish-code/face-image-swap/blob/master/output.jpg" height="400" width="600">
