@@ -9,7 +9,7 @@ import numpy
 import os
 import sys
 
-PREDICTOR_PATH = "shape_predictor_68_face_landmarks.dat"
+PREDICTOR_PATH = "pretrained_model.dat"
 SCALE_FACTOR = 1 
 FEATHER_AMOUNT = 11
 
@@ -180,27 +180,18 @@ def swap_donor_recipient(image1, image2, imageout):
 
 
 def process_swap():
-	donor_directory = './head/'
-	recipient_directory = './Recipient/'
-	out_directory = './swapped/'
+    parser = argparse.ArgumentParser(description="Splice image patch for face from GAN generated donor to detected face in recipient image.")
+	parser.add_argument("-d", "--donor", dest="donor", default="ash.jpg", help="path to directory containing GAN generated faces")
+	parser.add_argument("-r", "--recipient", dest="recipient", default="trump.jpg", help="path to directory containing images into which faces are spliced")
+	parser.add_argument("-o", "--output", dest="output", default="result.jpg", help="output directory into which spliced images are saved")
 	
-	head_image_paths = os.listdir(donor_directory)
-	recipient_paths = os.listdir(recipient_directory)
+	args = parser.parse_args()
+	donor_image = args.donor
+	recipient_image = args.recipient
+	output_image = args.output
 	
-	for head_img in head_image_paths:
-		head_path = donor_directory + head_img
-		for recipient_img in recipient_paths:
-			recipient_path = recipient_directory + recipient_img
-			out_img = head_img.split('.')[0] + '-' + recipient_img.split('.')[0] + '.png'
-			out_path = out_directory + out_img
-			swap_donor_recipient(recipient_path, head_path, out_path)
-			print('{}, {}, {}'.format(head_path, recipient_path, out_path))
-			
+    swap_donor_recipient(recipient_iamge, donor_image, output_image)
+
 
 if __name__ == '__main__':
-	# process_swap()
-	swap_donor_recipient('chamonix2.png', 'ash4.jpg', 'ash-chamonix.jpg')
-
-
-
-
+	process_swap()
