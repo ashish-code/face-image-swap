@@ -6,9 +6,9 @@ email: ashishagupta@gmail.com
 version: 0.1.1
 
 ----------------------------------------------------------------------
+Extract the pre-trained facial landmark model file.
 
-usage: 	$python face_swap.py
-		$python pGan_fSplice.py [option] arg
+usage: 	$python face_swap.py -d <donor-image> -r <recipient-iamge> -o <output-image>
 		
 options:
 "-d", "--donor", dest="donor", help="path to donor face image"
