@@ -6,6 +6,8 @@ email: ashishagupta@gmail.com
 version: 0.1.1
 
 ----------------------------------------------------------------------
+## Usage
+
 Extract the pre-trained facial landmark model file.
 
 usage: 	$python face_swap.py -d <donor-image> -r <recipient-iamge> -o <output-image>
@@ -16,8 +18,8 @@ options:
 "-o", "--output", dest="output", default="face_fusion.png", help="path to result image"
 
 ----------------------------------------------------------------------
+## Requirements
 
-Requirements:
 This program uses:
 dlib (http://dlib.net/)
 opencv (https://github.com/opencv/opencv)
@@ -33,3 +35,16 @@ You can use the '--' to split the result file name to acquire the donor/recipien
 
 The program is not designed to work in all circumstances, ie. face not detected or sufficient facial landmarks not found,
 for the face path is too small, etc. In all such cases, the failed output file is recorded in a log file: ./log.txt
+
+------------------------------------------------------------------------
+
+## Results
+
+Donor Image:
+![donor image](https://github.com/ashish-code/face-image-swap/blob/master/ash.jpg)
+
+Recipient Image:
+![recipient image](https://github.com/ashish-code/face-image-swap/blob/master/trump.jpg)
+
+Result Image:
+![face swapped image](https://github.com/ashish-code/face-image-swap/blob/master/output.jpg)
