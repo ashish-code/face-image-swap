@@ -3,6 +3,7 @@
 
 """
 
+import argparse
 import cv2
 import dlib
 import numpy
@@ -180,18 +181,18 @@ def swap_donor_recipient(image1, image2, imageout):
 
 
 def process_swap():
-    parser = argparse.ArgumentParser(description="Splice image patch for face from GAN generated donor to detected face in recipient image.")
-	parser.add_argument("-d", "--donor", dest="donor", default="ash.jpg", help="path to directory containing GAN generated faces")
-	parser.add_argument("-r", "--recipient", dest="recipient", default="trump.jpg", help="path to directory containing images into which faces are spliced")
-	parser.add_argument("-o", "--output", dest="output", default="result.jpg", help="output directory into which spliced images are saved")
-	
-	args = parser.parse_args()
-	donor_image = args.donor
-	recipient_image = args.recipient
-	output_image = args.output
-	
-    swap_donor_recipient(recipient_iamge, donor_image, output_image)
+    parser = argparse.ArgumentParser(description="Splice face patch from donor image onto recipient image.")
+    parser.add_argument("-d", "--donor", dest="donor", default="ash.jpg", help="path to donor face image")
+    parser.add_argument("-r", "--recipient", dest="recipient", default="trump.jpg", help="path to recipient face image")
+    parser.add_argument("-o", "--output", dest="output", default="result.jpg", help="path to output image")
+
+    args = parser.parse_args()
+    donor_image = args.donor
+    recipient_image = args.recipient
+    output_image = args.output
+
+    swap_donor_recipient(recipient_image, donor_image, output_image)
 
 
 if __name__ == '__main__':
-	process_swap()
+    process_swap()

@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-from urllib import urlretrieve
+from urllib.request import urlretrieve
 import os, sys, json, time, errno
 import requests, argparse, multiprocessing
 
@@ -162,7 +162,7 @@ if __name__ == '__main__':
     parser_media = subparsers.add_parser("media",   help="Retrieve media metadata and files.")
     parser_media.add_argument("credentials",        help="User credentials, in format 'username:password'.")
     parser_media.add_argument("output_directory",   help="Directory to save metadata and associated files.")
-    parser_media.add_argument("-l", "--limit",      help="Limit the number of records to retrieve.", type=int, default=sys.maxint)
+    parser_media.add_argument("-l", "--limit",      help="Limit the number of records to retrieve.", type=int, default=sys.maxsize)
     parser_media.add_argument("-j", "--jobs",       help="Number of download processes to spawn.", type=int)
     parser_media.add_argument("-f", "--fields",     help="Metadata fields to return, comma separated.", default=None)
     parser_media.add_argument("-d", "--data",       help="Filter data to post to the API, ex. '{\"width\": {\"type\": \"range\", \"value\": [100,200]}, \"media_type\": {\"type\": \"exact\", \"value\": \"image\"}}'.")
@@ -173,7 +173,7 @@ if __name__ == '__main__':
     parser_journals = subparsers.add_parser("journals", help="Retrieve journal metadata and files.")
     parser_journals.add_argument("credentials",         help="User credentials, in format 'username:password'.")
     parser_journals.add_argument("output_directory",    help="Directory to save metadata and associated files.")
-    parser_journals.add_argument("-l", "--limit",       help="Limit the number of records to retrieve.", type=int, default=sys.maxint)
+    parser_journals.add_argument("-l", "--limit",       help="Limit the number of records to retrieve.", type=int, default=sys.maxsize)
     parser_journals.add_argument("-j", "--jobs",        help="Number of download processes to spawn.", type=int)
     parser_journals.add_argument("-f", "--fields",      help="Metadata fields to return, comma separated.\nChoices: name,username,reviewer,journal,sequestered,media_type,description,count,manipulation_units,display_image_url,version,last_updated.", default=None)
     parser_journals.add_argument("-d", "--data",        help="Filter data to post to the API, ex. '{\"manipulation_units\": {\"type\": \"exact\", \"value\": \"2-Unit\"}, \"media_type\": {\"type\": \"exact\", \"value\": \"image\"}}'.")
@@ -184,7 +184,7 @@ if __name__ == '__main__':
     parser_cameras = subparsers.add_parser("cameras", help="Retrieve camera metadata and files.")
     parser_cameras.add_argument("credentials",        help="User credentials, in format 'username:password'.")
     parser_cameras.add_argument("output_directory",   help="Directory to save metadata and associated files.")
-    parser_cameras.add_argument("-l", "--limit",      help="Limit the number of records to retrieve.", type=int, default=sys.maxint)
+    parser_cameras.add_argument("-l", "--limit",      help="Limit the number of records to retrieve.", type=int, default=sys.maxsize)
     parser_cameras.add_argument("-j", "--jobs",       help="Number of download processes to spawn.", type=int)
     parser_cameras.add_argument("-f", "--fields",     help="Metadata fields to return, comma separated.\nChoices: hp_device_local_id,hp_camera_model,exif,calibrations,affiliation,camera_edition,camera_type,camera_sensor,camera_description,camera_lens_mount,camera_firmware,camera_version,sequestered,high_provenance,available.", default=None)
     parser_cameras.add_argument("-d", "--data",       help="Filter data to post to the API, ex. '{\"high_provenance\": {\"type\": \"exact\", \"value\": \"true\"}, \"available\": {\"type\": \"exact\", \"value\": \"true\"}}'.")
@@ -207,14 +207,14 @@ if __name__ == '__main__':
     if args.resume and os.path.exists(os.path.join(directory, subcommand, "metadata.json")) and not args.input_file:
         with open(os.path.join(directory, subcommand, "metadata.json"), 'r') as infile:
             start_idx = sum(1 for line in infile)
-        start_page = start_idx/1000 + 1
+        start_page = start_idx//1000 + 1
         kwargs["resume_idx"] = start_idx - (start_page-1)*1000
     else:
         start_idx  = 0
         start_page = 1
         kwargs["resume_idx"] = 0
 
-    start_page = start_idx/1000 + 1
+    start_page = start_idx//1000 + 1
     if start_page > 1:
         print("Resuming download at page %d" % start_page)
 
