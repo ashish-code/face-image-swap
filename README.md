@@ -1,3 +1,4 @@
+> **Archived — consolidated into [GAN_face_splice](https://github.com/ashish-code/GAN_face_splice).** This repository's full content and history are preserved there on the `variant/face-image-swap` branch.
 # Face Image Swap
 
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
